@@ -60,43 +60,50 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                    <code class="language-markup">
-                                &lt;html>
-                                    &lt;body>
-                                        
-                                        &lt;div class="" id="ViewOverlay">
+                    <div class="col-md-12 p-0">
+                        <pre>
+                        <code class="language-markup">
+                                    &lt;html>
+                                        &lt;body>
                                             
-                                        &lt;/div>
-                                    &lt;/body>
-                                &lt;/html>
-                    </code>
+                                            &lt;!-- Overlay to be initialized and displayed on below container -->
+                                            &lt;div class="" id="ViewOverlay">
+                                                ... all child mark-up goes here
+                                            &lt;/div>
+                                        &lt;/body>
+                                    &lt;/html>
+                        </code>
+                    </pre>
+                    </div>
 
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-                    <div class="col-md-4">
-                        <code class="language-javascript">
-                                var app = new QkApp($, {});
+                    <div class="col-md-12 p-0">
+                        <pre>
+                            <code class="language-javascript">
+                                    var app = new QkApp($, {});
 
-                                var jqDocument = $(document),
-                                    elOverlay = $('#demo-OverlayView').QkOverlay();
-                    
-                                jqDocument
-                                    .on('click', '#btnShowOverlay', () => {
-                                        elOverlay.show_overlay('Please wait', '');
-                                    })
-                                    .on('click', '#btnHideOverlay', () => {
-                                        elOverlay.hide_overlay();
-                                    });
-                        </code>
+                                    var jqDocument = $(document),
+                                        elOverlay = $('#demo-OverlayView').QkOverlay();
+                        
+                                    jqDocument
+                                        .on('click', '#btnShowOverlay', () => {
+                                            elOverlay.show_overlay('Please wait', '');
+                                        })
+                                        .on('click', '#btnHideOverlay', () => {
+                                            elOverlay.hide_overlay();
+                                        });
+                            </code>
+                        </pre>
                     </div>
 
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary" id="btnShowOverlay">Show Overlay</button>
-                        <button type="button" class="btn btn-secondary ml-1" id="btnHideOverlay">Hide Overlay</button>
+                        <button type="button" class="btn btn-sm btn-outline-success" id="btnShowOverlay">Show Overlay</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger ml-1" id="btnHideOverlay">Hide Overlay</button>
                     </div>
 
                     <div class="col-md-12 my-3" id="demo-OverlayView" style="height:200px; width:200px;border:1px solid">
