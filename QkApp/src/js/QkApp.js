@@ -576,4 +576,5 @@ var QkApp = function ($, objOptions) {
     if (objOptions.hasOwnProperty('loginConfig')) {
         initLoginManager(this, objOptions.loginConfig);
     }
+    
 };

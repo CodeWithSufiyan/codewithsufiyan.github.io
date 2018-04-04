@@ -79,7 +79,97 @@
             </nav>
             <main role="main" class="container col-md-10 offset-md-2">
 
-                <div class="jumbotron pt-4">
+                <div class="section jumbotron pt-4" id="section-AlertDemo">
+                    <span class="m-auto" data-qkapp-role="alert-container">
+                    </span>
+                    <h1>Alert Example</h1>
+                    <ul class="nav nav-tabs mb-1" id="tab-overlay" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tab-htmlOverlay" data-toggle="tab" href="#htmlOverlay" role="tab" aria-controls="home" aria-selected="true">HTML</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-jsOverlay" data-toggle="tab" href="#jsOverlay" role="tab" aria-controls="profile" aria-selected="false">Javascript</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab-demoOverlay" data-toggle="tab" href="#demoOverlay" role="tab" aria-controls="contact" aria-selected="false">Demo</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="htmlOverlay" role="tabpanel" aria-labelledby="tab-htmlOverlay">
+
+                            <a class="copy-to-clipboard" href="javascript:void(0)">
+                                <i class="fa fa-copy"></i>
+                            </a>
+                            <div class="col-md-12 p-0">
+                                <pre>
+                        <code class="language-markup">
+                                    &lt;html>
+                                        &lt;body>
+                                            
+                                            &lt;!-- Overlay to be initialized and displayed on below container -->
+                                            &lt;div class="" id="ViewOverlay">
+                                                ... all child mark-up goes here
+                                            &lt;/div>
+                                        &lt;/body>
+                                    &lt;/html>
+                        </code>
+                    </pre>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="jsOverlay" role="tabpanel" aria-labelledby="tab-jsOverlay">
+
+                            <a class="copy-to-clipboard" href="javascript:void(0)">
+                                <i class="far fa-copy"></i>
+                            </a>
+                            <div class="col-md-12 p-0">
+                                <pre>
+                            <code class="language-javascript">
+                                    function GetData(){
+                                        // View Overlay over elOverlay Container
+                                        elOverlay.show_overlay('Please wait', '<code class="language-markup">&lt;i class="fa fa-spinner fa-spin" style="font-size:40px;color:white">&lt;/i></code>');
+                                        
+                                        ...your ajax logic goes here
+                                    }
+
+                                    var app = new QkApp($, {}); // Make your App a QkApp
+                                    window.alert = app.alert.bind(app); // Over-ride window.alert to that of QkAlert
+
+                                    var jqDocument = $(document),
+                                        elOverlay = $('#demo-OverlayView').QkOverlay(); // Make a Overlay Container
+
+                                    jqDocument
+                                        .on('click', '#btnShowOverlay', () => {
+                                            GetData(); // Get Data asynchronously
+                                        });
+                            </code>
+                        </pre>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="demoOverlay" role="tabpanel" aria-labelledby="tab-demoOverlay">
+
+
+                            <div class="col-md-12 p-0 my-2">
+                                <div class="col-md-12">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-sm btn-outline-success" id="btnShowFormAlert">Show Form Alert</button>
+                                        <button type="button" class="btn btn-sm btn-outline-success ml-1" id="btnShowFieldAlert">Show Field Alert</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group my-1">
+                                        <fieldset class="has-danger">
+                                            <input class="form-control" id="txt" />
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jumbotron pt-4" id="section-OverlayDemo">
                     <span class="m-auto" data-qkapp-role="alert-container">
                     </span>
                     <h1>Overlay Example</h1>
@@ -157,9 +247,7 @@
                             <div class="col-md-12 my-3" id="demo-OverlayView" style="height:200px; width:200px;border:1px solid;text-align:center">
                                 <button type="button" class="btn btn-sm btn-outline-success mt-4" id="btnShowOverlay">Get Data</button>
                             </div>
-<fieldset>
-    <input id="s"/>
-</fieldset>
+
                         </div>
                     </div>
                 </div>
@@ -172,40 +260,25 @@
 
     <script type="text/javascript" src="../../lib/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../lib/bootstrap/4.0.0/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../src/js/QkApp.js"></script>
+    <script type="text/javascript" src="../../src/js/QkApp_D.js"></script>
     <script src="../../lib/prism/prism.js"></script>
 
     <script type="text/javascript">
-        function CopyToClipboard() {
 
-        }
+        var
+            jqDocument = $(document),
+            qkApp = new QkApp(),
+            qkAlert = qkApp.QkFormAlert();
 
-        function GetData() {
-            elOverlay.show_overlay('Please wait', '<i class="fa fa-spinner fa-spin" style="font-size:40px;color:white"></i>');
-            var jqxhr = $.ajax("http://northwind.servicestack.net/customers.json")
-                .done(function (res) {
-                    var oData = res;
-                    alert("Data retrieved successfully", "alert-success", 5);
-                })
-                .fail(function () {
-                    alert("Something went wrong. Site not available", "alert-danger", 5);
-                })
-                .always(function () {
-                    elOverlay.hide_overlay();
-                });
-        }
-
-        var app = new QkApp($, {});
-        window.alert = app.alert.bind(app);
-
-        var jqDocument = $(document),
-            elOverlay = $('#demo-OverlayView').QkOverlay();
+        window.alert = qkAlert; // If needed, override the window.alert function
 
         jqDocument
-            .on('click', '#btnShowOverlay', function () {
-                GetData();
-            });
-
+            .on('click', '#btnShowFormAlert', function () {
+                alert('alert', 'alert-danger', 4);
+            })
+            .on('click', '#btnShowFieldAlert', function () {
+                $('#txt').QkFieldAlert('alert');
+            })
     </script>
 </body>
 
